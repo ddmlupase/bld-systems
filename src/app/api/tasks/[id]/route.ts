@@ -4,7 +4,7 @@ import { prisma } from '@/lib/prisma'
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession()
@@ -12,11 +12,12 @@ export async function PATCH(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const { id } = await params
     const { completed } = await request.json()
 
     const task = await prisma.task.update({
       where: {
-        id: params.id,
+        id: id,
         userId: session.user.id
       },
       data: {
@@ -35,7 +36,7 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession()
@@ -43,9 +44,11 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const { id } = await params
+
     await prisma.task.delete({
       where: {
-        id: params.id,
+        id: id,
         userId: session.user.id
       }
     })
