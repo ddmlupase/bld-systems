@@ -1,9 +1,7 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcryptjs'
-// Adjust the import path to match the actual location of your prisma client
-// Update the path below if your prisma client is in a different location
-import { prisma } from '../../../../lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 
 
