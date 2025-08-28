@@ -1,0 +1,10 @@
+{
+  "env": {
+    "NEXTAUTH_URL": "https://your-domain.vercel.app"
+  },
+  "build": {
+    "env": {
+      "NEXTAUTH_URL": "https://your-domain.vercel.app"
+    }
+  }
+}
